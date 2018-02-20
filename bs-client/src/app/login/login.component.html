@@ -1,0 +1,24 @@
+<div class="login-page">
+    <div class="row">
+        <div class="col-md-4 push-md-4 mainDiv">
+            <img src="assets/logo.png" width="150px" class="user-avatar" />
+            <h1>Welcome User!</h1>
+            <form role="form" (submit)="onLoginSubmit()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="email" name="email" class="form-control input-underline input-lg"placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="password" name="password" class="form-control input-underline input-lg" placeholder="Password">
+                    </div>
+                </div>
+                <input type="submit" class="btn rounded-btn" value="Login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/register']">Register</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="my-container">
+    <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+</div>

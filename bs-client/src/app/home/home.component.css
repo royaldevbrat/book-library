@@ -1,0 +1,99 @@
+header {
+  height: 100vh;
+  overflow: hidden;
+  background-image: url(../../assets/library-bright.jpg);
+  background-size: cover;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+header .projName{
+    font-size: 50px;
+    color: #fff;
+    font-style: oblique;
+    font-family: Helvetica Neue;
+}
+.menu-div{
+    position: fixed;
+    top: 2%;
+    right: 4%;
+}
+/*Strip the ul of padding and list styling*/
+.menu-ul{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    position: relative;
+}
+/*Create a horizontal list with spacing*/
+.menu-li {
+    display:inline-block;
+    /* float: left; */
+    margin-right: 10px;
+}
+/*Style for menu links*/
+.menu-li a {
+    display: block;
+    min-width: 100px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    color: #ffffff; 
+    text-decoration: none;
+    border-radius: 25px;
+    border: 2px solid #ffffff;
+}
+/*Hover state for top level links*/
+.menu-li:hover a {
+    background: #000000;
+    color:#ffffff;
+}
+
+/*Style 'show menu' label button and hide it by default*/
+.show-menu {
+    color: #fff;
+    font-size: 30px;
+    width: 25px;
+    display: none;
+}
+/*Hide checkbox*/
+#show-menu{
+    display: none;
+}
+/*Show menu when invisible checkbox is checked*/
+#show-menu:checked ~ .menu-ul{
+    display: block;
+}
+/*Responsive Styles*/
+@media screen and (max-width : 760px){
+    header .projLogo{
+        width: 75%;
+    }
+    header .projName{
+        font-size: 35px;
+        color: #fff;
+    }
+    /*.menu-ul {
+        position: static;
+        display: none;
+    }
+    .menu-li {
+        margin-bottom: 1px;
+    }
+    .show-menu {
+        display:block;
+    }*/
+}

@@ -1,0 +1,29 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "MEAN Book Store Applicaion",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "express-jwt": "*",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "*",
+    "multer": "^1.3.0",
+    "node-cron": "^1.2.1",
+    "passport": "*",
+    "passport-jwt": "*",
+    "path": "^0.12.7",
+    "redis": "^2.8.0"
+  },
+  "author": "Devbrat",
+  "license": "Free"
+}

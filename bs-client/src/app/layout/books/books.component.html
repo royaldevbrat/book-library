@@ -1,0 +1,146 @@
+<div class="top-head left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-lg-5">
+                <h1>Book Library</h1>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <form class="ml-auto"  (submit)="onBookSearchSubmit()">
+                    <div class="search">
+                        <input type="text" list="bookserch" class="form-control" [(ngModel)]="searchFor" id="searchFor" name="searchFor"  placeholder="Search" autocomplete="off" />
+                        <datalist id="bookserch" *ngFor="let sbook of searchData;let i = index;">
+                            <option value="{{ sbook.title }}" (click)="increaseSearchCounter(sbook._id)" >{{ sbook.author }}</option>
+                        </datalist>
+                        <button type="submit" class="btn btn-search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 col-lg-3 admin-bar">
+                <nav class="nav nav-inline">
+                    <a  *ngIf="user.role == 'Editor'" (click)="open(edittaskmodal)" class="nav-link">
+                        <i class="fa fa-plus-circle"></i>
+                    </a>
+                    <a [routerLink]="['/books']" class="nav-link">
+                        <i class="fa fa-user"></i> {{user.name}}
+                    </a>
+                    <a [routerLink]="['/home']" class="nav-link" title="Sign Out" (click)="onLoggedout()">
+                        <i class="fa fa-fw fa-power-off"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-01 scrollbar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-6" *ngFor="let book of booksData;let i = index;">
+                        <div class="card card-01 height-fix">
+                            <img *ngIf="book.isCoverAvailable" class="card-img-top" src="{{ baseUrl }}img/{{ book.imageLink }}" alt="Book Image">
+                            <img *ngIf="!book.isCoverAvailable" class="card-img-top" src="assets/default-cover.jpg" alt="Book Image">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title">
+                                    <strong>{{ book.title }}</strong>
+                                </h4>
+                                <p class="card-text">{{ book.author }}
+                                    <br>
+                                </p>
+                                <p class="card-text">Pages: {{ book.pages }}, Year: {{ book.year }}</p>
+                                <p class="card-text">Language: {{ book.language }}
+                                    <a href="#"><i class="fa fa-bookmark-o"></i></a>
+                                    <a href="#"><i class="fa fa-heart-o"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="col-lg-4 side-bar col-md-12">
+                <ul class="nav nav-tabs" role="tablist" id="myTab">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#topsearch" role="tab">Top Search</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content sidebar-tabing" id="nav-tabContent">
+                    <div class="tab-pane active" id="topsearch" role="tabpanel">
+                        <div class="media" *ngFor="let book of topBooksData;let i = index;">
+                            <a href="#">
+                                <img  *ngIf="book.isCoverAvailable" class="d-flex mr-3" src="{{ baseUrl }}img/{{ book.imageLink }}" alt="Book Image">
+                                <img  *ngIf="!book.isCoverAvailable" class="d-flex mr-3" src="assets/default-cover.jpg" alt="Book Image">
+                            </a>
+                            <div class="media-body">
+                                <div class="news-title">
+                                    <h2 class="title-small">
+                                        <a href="#">{{ book.title }}</a>
+                                    </h2>
+                                </div>
+                                <div class="news-auther">
+                                    <span class="time">{{ book.addedOn | timeAgo}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<section class="action-sec">
+    <div class="container">
+        <footer>&copy; Copyright 2018 Devbrat</footer>
+    </div>
+</section>
+
+
+<ng-template #edittaskmodal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Add New Book</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-area">
+            <form role="form" (submit)="onBookSubmit()">
+                <div class="form-group">
+                    <label>Book Title:</label>
+                    <input [(ngModel)]="btitle" type="text" class="form-control" id="btitle" name="btitle" placeholder="Enter Book Title" required>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Author:</label>
+                        <input [(ngModel)]="bauthor" type="text" class="form-control" id="bauthor" name="bauthor" placeholder="Enter Author Name" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Language:</label>
+                        <input [(ngModel)]="blanguage" type="text" class="form-control" id="blanguage" name="blanguage" placeholder="Enter Language" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Year of Publish:</label>
+                        <input [(ngModel)]="byear" type="text" class="form-control" id="byear" name="byear" placeholder="Enter Year" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Pages:</label>
+                        <input [(ngModel)]="bpages" type="text" class="form-control" id="bpages" name="bpages" placeholder="Enter Pages" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cover Page:</label>
+                    <input type="file" class="form-control-file" [(ngModel)]="bimg" id="bimg" name="bimg" (change)="onChange($event)" />
+                    <img src="{{imgUrl}}" style="max-height: 110px;max-width: 110px;margin-top: 2%;" />
+                </div>
+                <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Add Book</button>
+                <button type="button" id="button" name="button" class="btn btn-default pull-left" (click)="d('Cross click')">Cancel</button>
+            </form>
+        </div>
+    </div>
+</ng-template>
